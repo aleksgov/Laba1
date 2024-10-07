@@ -1,9 +1,10 @@
 package main;
 
 import command.*;
-import repositories.GradeBookRepository;
-import repositories.ThesisRepository;
-import repositories.CourseWorkRepository;
+import entities.CourseWork;
+import entities.GradeBook;
+import entities.Thesis;
+import repositories.GeneralStudentRecordRepository;
 
 import java.util.Scanner;
 import java.util.HashMap;
@@ -11,9 +12,10 @@ import java.util.Map;
 
 public class Main {
 
-    private static GradeBookRepository gradeBookRepo = new GradeBookRepository();
-    private static ThesisRepository thesisRepo = new ThesisRepository();
-    private static CourseWorkRepository courseWorkRepo = new CourseWorkRepository();
+    private static GeneralStudentRecordRepository<GradeBook> gradeBookRepo = new GeneralStudentRecordRepository<>(GradeBook.class);
+    private static GeneralStudentRecordRepository<Thesis> thesisRepo = new GeneralStudentRecordRepository<>(Thesis.class);
+    private static GeneralStudentRecordRepository<CourseWork> courseWorkRepo = new GeneralStudentRecordRepository<>(CourseWork.class);
+
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -32,9 +34,9 @@ public class Main {
         createRecordCommands.put(3, new CreateCourseWorkCommand());
 
         // Команды сортировки записей
-        sortRecordCommands.put(1, new SortGradeBookCommand());
-        sortRecordCommands.put(2, new SortThesisCommand());
-        sortRecordCommands.put(3, new SortCourseWorkCommand());
+        sortRecordCommands.put(1, new SortRecordCommand<>(getGradeBookRepo(), "ведомостей"));
+        sortRecordCommands.put(2, new SortRecordCommand<>(getThesisRepo(), "дипломных работ"));
+        sortRecordCommands.put(3, new SortRecordCommand<>(getCourseWorkRepo(), "курсовых работ"));
 
         boolean exit = false;
 
@@ -71,19 +73,19 @@ public class Main {
         }
     }
 
+    public static GeneralStudentRecordRepository<GradeBook> getGradeBookRepo() {
+        return gradeBookRepo;
+    }
+
+    public static GeneralStudentRecordRepository<Thesis> getThesisRepo() {
+        return thesisRepo;
+    }
+
+    public static GeneralStudentRecordRepository<CourseWork> getCourseWorkRepo() {
+        return courseWorkRepo;
+    }
     public static Scanner getScanner() {
         return scanner;
     }
 
-    public static GradeBookRepository getGradeBookRepo() {
-        return gradeBookRepo;
-    }
-
-    public static ThesisRepository getThesisRepo() {
-        return thesisRepo;
-    }
-
-    public static CourseWorkRepository getCourseWorkRepo() {
-        return courseWorkRepo;
-    }
 }

@@ -1,30 +1,24 @@
 package command;
 
 import entities.Thesis;
-
-import java.time.LocalDate;
-import java.util.Scanner;
 import main.Main;
 
-public class CreateThesisCommand implements Command {
+import java.time.LocalDate;
+
+public class CreateThesisCommand extends CreateRecordCommand<Thesis> {
     @Override
-    public void execute() {
-        Main.clearConsole();
-        Scanner scanner = Main.getScanner();
+    protected Thesis createRecord(String id, String name, LocalDate date, String title, int grade) {
+        return new Thesis(id, name, date, title, grade);
+    }
 
-        System.out.print("Введите ID: ");
-        String id = scanner.nextLine();
-        System.out.print("Введите имя студента: ");
-        String name = scanner.nextLine();
-        System.out.print("Введите дату (ГГГГ-ММ-ДД): ");
-        LocalDate date = LocalDate.parse(scanner.nextLine());
+    @Override
+    protected String getAdditionalInfo() {
         System.out.print("Введите тему: ");
-        String title = scanner.nextLine();
-        System.out.print("Введите оценку: ");
-        int grade = Integer.parseInt(scanner.nextLine());
+        return Main.getScanner().nextLine();
+    }
 
-        Thesis thesis = new Thesis(id, name, date, title, grade);
-        Main.getThesisRepo().add(thesis);
-        System.out.println("Запись добавлена в Thesis.");
+    @Override
+    protected void addRecord(Thesis record) {
+        Main.getThesisRepo().add(record);
     }
 }

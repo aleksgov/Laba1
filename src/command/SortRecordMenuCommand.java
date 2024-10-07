@@ -1,4 +1,5 @@
 package command;
+
 import main.Main;
 import java.util.Map;
 
@@ -13,10 +14,11 @@ public class SortRecordMenuCommand implements Command {
     public void execute() {
         Main.clearConsole();
         System.out.println("Выберите тип записи для сортировки:");
-        System.out.println("1. GradeBook");
-        System.out.println("2. Thesis");
-        System.out.println("3. CourseWork");
+        System.out.println("1. Ведомость (GradeBook)");
+        System.out.println("2. Дипломная работа (Thesis)");
+        System.out.println("3. Курсовая работа (CourseWork)");
         System.out.print("Введите номер команды: ");
+
         int choice = Integer.parseInt(Main.getScanner().nextLine());
 
         Command command = sortRecordCommands.get(choice);

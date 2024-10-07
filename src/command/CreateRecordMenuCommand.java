@@ -18,6 +18,7 @@ public class CreateRecordMenuCommand implements Command {
         System.out.println("2. Thesis");
         System.out.println("3. CourseWork");
         System.out.print("Введите номер команды: ");
+
         int choice = Integer.parseInt(Main.getScanner().nextLine());
 
         Command command = createRecordCommands.get(choice);
