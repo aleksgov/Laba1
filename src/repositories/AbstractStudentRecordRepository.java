@@ -29,10 +29,6 @@ public abstract class AbstractStudentRecordRepository<T extends StudentRecord> i
         return records.stream().filter(r -> r.getId().equals(id)).findFirst().orElse(null);
     }
 
-    @Override
-    public List<T> sortByDate() {
-        return records.stream().sorted(Comparator.comparing(StudentRecord::getDate)).collect(Collectors.toList());
-    }
 
     @Override
     public List<T> search(String keyword) {

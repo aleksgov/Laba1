@@ -3,6 +3,7 @@ package main;
 import command.*;
 import entities.CourseWork;
 import entities.GradeBook;
+import entities.StudentRecord;
 import entities.Thesis;
 import repositories.GeneralStudentRecordRepository;
 
@@ -22,16 +23,23 @@ public class Main {
         Map<Integer, Command> mainMenuCommands = new HashMap<>();
         Map<Integer, Command> createRecordCommands = new HashMap<>();
         Map<Integer, Command> sortRecordCommands = new HashMap<>();
+        Map<Integer, Command> removeRecordCommands = new HashMap<>();
 
         // Команды для главного меню
         mainMenuCommands.put(1, new CreateRecordMenuCommand(createRecordCommands)); // Подменю создания записей
         mainMenuCommands.put(2, new SortRecordMenuCommand(sortRecordCommands));     // Подменю сортировки записей
         mainMenuCommands.put(3, new ExitCommand());
+        mainMenuCommands.put(4, new RemoveRecordMenuCommand(removeRecordCommands)); // Подменю удаления записей
 
         // Команды создания записей
         createRecordCommands.put(1, new CreateGradeBookCommand());
         createRecordCommands.put(2, new CreateThesisCommand());
         createRecordCommands.put(3, new CreateCourseWorkCommand());
+
+        // Команды удаления записей
+        removeRecordCommands.put(1, new RemoveRecordCommand<>(GradeBook.class));
+        removeRecordCommands.put(2, new RemoveRecordCommand<>(Thesis.class));
+        removeRecordCommands.put(3, new RemoveRecordCommand<>(CourseWork.class));
 
         // Команды сортировки записей
         sortRecordCommands.put(1, new SortRecordCommand<>(getGradeBookRepo(), "ведомостей"));
@@ -58,6 +66,8 @@ public class Main {
         System.out.println("1. Создать запись");
         System.out.println("2. Сортировать записи");
         System.out.println("3. Выйти");
+        System.out.println("4. Удалить запись");
+
         System.out.print("Введите номер команды: ");
     }
 
@@ -84,8 +94,19 @@ public class Main {
     public static GeneralStudentRecordRepository<CourseWork> getCourseWorkRepo() {
         return courseWorkRepo;
     }
+
+    public static <T extends StudentRecord> GeneralStudentRecordRepository<T> getRepository(Class<T> clazz) {
+        if (clazz == GradeBook.class) {
+            return (GeneralStudentRecordRepository<T>) gradeBookRepo;
+        } else if (clazz == Thesis.class) {
+            return (GeneralStudentRecordRepository<T>) thesisRepo;
+        } else if (clazz == CourseWork.class) {
+            return (GeneralStudentRecordRepository<T>) courseWorkRepo;
+        }
+        return null; // Возвращает null, если тип записи не найден
+    }
+
     public static Scanner getScanner() {
         return scanner;
     }
-
 }

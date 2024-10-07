@@ -14,6 +14,7 @@ public abstract class StudentRecord {
         this.date = date;
         this.grade = grade;
     }
+
     public String getId() {
         return id;
     }

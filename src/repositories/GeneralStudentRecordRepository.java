@@ -14,8 +14,6 @@ public class GeneralStudentRecordRepository<T extends StudentRecord> extends Abs
     public List<T> sortByGrade() {
         if (CourseWork.class.isAssignableFrom(typeClass)) {
             return records.stream().sorted(Comparator.comparing(StudentRecord::getGrade).reversed()).collect(Collectors.toList());
-        } else if (GradeBook.class.isAssignableFrom(typeClass)) {
-            return records.stream().sorted(Comparator.comparing(r -> ((GradeBook) r).getAverageGrade()).reversed()).collect(Collectors.toList());
         } else if (Thesis.class.isAssignableFrom(typeClass)) {
             return records.stream().sorted(Comparator.comparing(StudentRecord::getGrade).reversed()).collect(Collectors.toList());
         } else {
