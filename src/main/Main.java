@@ -25,13 +25,15 @@ public class Main {
         Map<Integer, Command> sortRecordCommands = new HashMap<>();
         Map<Integer, Command> removeRecordCommands = new HashMap<>();
         Map<Integer, Command> updateRecordCommands = new HashMap<>();
+        Map<Integer, Command> findRecordCommands= new HashMap<>();
 
         // Команды для главного меню
         mainMenuCommands.put(1, new CreateRecordMenuCommand(createRecordCommands)); // Подменю создания записей
         mainMenuCommands.put(2, new SortRecordMenuCommand(sortRecordCommands));     // Подменю сортировки записей
         mainMenuCommands.put(3, new RemoveRecordMenuCommand(removeRecordCommands)); // Подменю удаления записей
         mainMenuCommands.put(4, new UpdateRecordMenuCommand(updateRecordCommands)); // Подменю обновления записей
-        mainMenuCommands.put(5, new ExitCommand());
+        mainMenuCommands.put(5, new FindRecordMenuCommand(findRecordCommands));
+        mainMenuCommands.put(6, new ExitCommand());
 
         // Команды создания записей
         createRecordCommands.put(1, new CreateGradeBookCommand());
@@ -52,6 +54,11 @@ public class Main {
         sortRecordCommands.put(1, new SortRecordCommand<>(getGradeBookRepo(), "ведомостей"));
         sortRecordCommands.put(2, new SortRecordCommand<>(getThesisRepo(), "дипломных работ"));
         sortRecordCommands.put(3, new SortRecordCommand<>(getCourseWorkRepo(), "курсовых работ"));
+
+        // Команды поиска записей
+        findRecordCommands.put(1, new FindRecordByIdCommand<>(getGradeBookRepo(), "ведомости"));
+        findRecordCommands.put(2, new FindRecordByIdCommand<>(getThesisRepo(), "дипломной работы"));
+        findRecordCommands.put(3, new FindRecordByIdCommand<>(getCourseWorkRepo(), "курсовой работы"));
 
         boolean exit = false;
 
@@ -74,7 +81,8 @@ public class Main {
         System.out.println("2. Сортировать записи");
         System.out.println("3. Удалить запись");
         System.out.println("4. Обновить запись");
-        System.out.println("5. Выйти");
+        System.out.println("5. Найти запись по ID");
+        System.out.println("6. Выйти");
 
         System.out.print("Введите номер команды: ");
     }

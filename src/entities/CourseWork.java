@@ -13,4 +13,15 @@ public class CourseWork extends StudentRecord {
     public String getSubject() {
         return subject;
     }
+
+    @Override
+    public String toString() {
+        return "CourseWork {" +
+                "ID='" + id + '\'' +
+                ", Student Name='" + studentName + '\'' +
+                ", Date=" + date +
+                ", Subject='" + subject + '\'' +
+                ", Grade=" + grade +
+                '}';
+    }
 }

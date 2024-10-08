@@ -13,4 +13,14 @@ public class Thesis extends StudentRecord {
     public String getTitle() {
         return title;
     }
+    @Override
+    public String toString() {
+        return "Thesis {" +
+                "ID='" + id + '\'' +
+                ", Student Name='" + studentName + '\'' +
+                ", Date=" + date +
+                ", Title='" + title + '\'' +
+                ", Grade=" + grade +
+                '}';
+    }
 }
