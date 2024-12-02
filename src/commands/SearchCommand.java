@@ -15,16 +15,19 @@ public class SearchCommand<T extends StudentRecord> implements Command {
     @Override
     public void execute() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Введите ключевое слово для поиска по имени студента или теме: ");
+        System.out.print("Введите ключевое слово для поиска по имени студента: ");
         String keyword = scanner.nextLine();
-
+        /*
         repository.searchByTitle(keyword).forEach(record -> {
-            System.out.println(record);  // Вызовет метод toString() для каждого найденного объекта
+            System.out.println(record);
         });
+         */
+        repository.searchByTitle(keyword).stream()
+                .forEach(record -> System.out.println(record));
     }
 
     @Override
     public String getDescription() {
-        return "Поиск записей по ключевому слову (имя студента или тема)";
+        return "Поиск записей по ключевому слову (имя студента)";
     }
 }

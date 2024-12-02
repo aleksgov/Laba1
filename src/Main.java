@@ -4,6 +4,7 @@ import repositories.*;
 
 import java.util.*;
 import java.util.InputMismatchException;
+import java.util.stream.IntStream;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,21 +18,25 @@ public class Main {
         while (true) {
             System.out.println("\nВыберите тип контента:");
             List<String> recordTypes = new ArrayList<>(repositories.keySet());
+            /*
             for (int i = 0; i < recordTypes.size(); i++) {
                 System.out.println((i + 1) + ". " + recordTypes.get(i));
             }
+            */
+            IntStream.range(0, recordTypes.size())
+                    .forEach(i -> System.out.println((i + 1) + ". " + recordTypes.get(i)));
+
             System.out.println((recordTypes.size() + 1) + ". Выход");
 
             System.out.print("\nВведите номер: ");
-            int typeChoice = -1;
+            int typeChoice;
 
-            // Проверка на корректность ввода
             try {
                 typeChoice = scanner.nextInt();
-                scanner.nextLine();  // Считывание новой строки после числа
+                scanner.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println("Ошибка: введено не число. Попробуйте снова.");
-                scanner.nextLine(); // Очистка буфера
+                scanner.nextLine();
                 continue;
             }
 
@@ -70,12 +75,18 @@ public class Main {
 
         while (true) {
             System.out.println("\nДоступные команды:");
+
+            /*
             for (int i = 0; i < commands.size(); i++) {
                 System.out.println((i + 1) + ". " + commands.get(i).getDescription());
             }
+            */
+
+            IntStream.range(0, commands.size())
+                    .forEach(i -> System.out.println((i + 1) + ". " + commands.get(i).getDescription()));
 
             System.out.print("\nВведите номер команды: ");
-            int choice = -1;
+            int choice;
 
             try {
                 choice = scanner.nextInt();
