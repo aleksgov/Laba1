@@ -1,6 +1,6 @@
-package command;
-import main.Main;
+package commands;
 
 public interface Command {
     void execute();
+    String getDescription();
 }

@@ -1,7 +1,7 @@
-package Interfaces;
+package repositories;
 
 import java.util.List;
 
 public interface SearchableStudentRecordRepository<T> extends SortableStudentRecordRepository<T> {
-    List<T> search(String keyword);
+    List<T> searchByTitle(String title);
 }

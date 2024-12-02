@@ -3,24 +3,18 @@ package entities;
 import java.time.LocalDate;
 
 public class Thesis extends StudentRecord {
-    private String title;
+    private String thesisTitle;
 
-    public Thesis(String id, String studentName, LocalDate date, String title, int grade) {
-        super(id, studentName, date, grade);
-        this.title = title;
+    public Thesis(int id, String studentName, LocalDate submissionDate, int grade, String thesisTitle) {
+        super(id, studentName, submissionDate, grade);
+        this.thesisTitle = thesisTitle;
     }
 
-    public String getTitle() {
-        return title;
-    }
+    public String getThesisTitle() { return thesisTitle; }
+    public void setThesisTitle(String thesisTitle) { this.thesisTitle = thesisTitle; }
+
     @Override
     public String toString() {
-        return "Thesis {" +
-                "ID='" + id + '\'' +
-                ", Student Name='" + studentName + '\'' +
-                ", Date=" + date +
-                ", Title='" + title + '\'' +
-                ", Grade=" + grade +
-                '}';
+        return super.toString() + String.format("\nНазвание диплома: %s", thesisTitle);
     }
 }
